@@ -1,4 +1,5 @@
 import logging
+import sys
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 from config import BOT_TOKEN
@@ -35,7 +36,7 @@ class FeedbackBot:
         """Запуск админ-панели как отдельного процесса"""
         try:
             admin_path = os.path.join(os.path.dirname(__file__), "admin.py")
-            subprocess.Popen(["python3.12.3", admin_path])
+            subprocess.Popen([sys.executable, admin_path])  # Используем текущую версию Python
             self.logger.info("Admin panel started successfully")
         except Exception as e:
             self.logger.error(f"Error starting admin panel: {e}")
@@ -44,6 +45,7 @@ class FeedbackBot:
         """Запуск бота"""
         try:
             self.logger.info("Starting feedback bot...")
+            await self.bot.delete_webhook()  # Удаляем вебхук перед start_polling
             self.start_admin_panel()
             await self.dp.start_polling(self.bot)
         except Exception as e:

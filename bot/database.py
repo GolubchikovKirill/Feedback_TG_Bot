@@ -27,7 +27,7 @@ class FeedbackModel(Base):
     created_at = Column(DateTime, default=func.now())
     chat_id = Column(BigInteger, nullable=True)
     user_id = Column(Integer, nullable=True)
-    feedback_text = Column(Text(500), nullable=True)
+    feedback_text = Column(String(500), nullable=False)
 
     def __repr__(self) -> str:
         return f"<Feedback(id={self.id}, type={self.feedback_type}, user_id={self.user_id})>"

@@ -35,7 +35,7 @@ class FeedbackBot:
         """Запуск админ-панели как отдельного процесса"""
         try:
             admin_path = os.path.join(os.path.dirname(__file__), "admin.py")
-            subprocess.Popen(["python3.13", admin_path])
+            subprocess.Popen(["python3.12.3", admin_path])
             self.logger.info("Admin panel started successfully")
         except Exception as e:
             self.logger.error(f"Error starting admin panel: {e}")
